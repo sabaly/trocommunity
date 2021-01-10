@@ -1,0 +1,102 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Trocommunity | {% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('vendor/icofont/icofont.min.css') }}">
+{% endblock %}
+
+
+{% block header %}
+    <header id="header">
+    <!-- Logo -->
+        <div class="logo">
+            <span class="troc">TROC</span>OMMUNITY
+        </div>
+    <!-- Navigation-->
+        <div class="nav-bar d-none d-lg-block">
+            <ul class="nav-menu">
+                <li><a href="#header" class="active">Acceuil</a></li>
+                <li class="cat"><a href="#">Catégories <i class="icofont-caret-down"></i></a>
+                    <ul class="categories">
+                        <li><a href="#">Roman & Drame</a>
+                        <li><a href="#">Science</a>
+                        <li><a href="#">Religion</a>
+                        <li><a href="#">Philosophie</a>
+                    </ul>
+                </li>
+                <li><a href="#about">A propos</a></li>
+                <li><a href="#contact">Contacts</a></li>
+            </ul>
+        </div>
+    
+    <!-- account -->
+        <div class="account-manage">
+            <div class="user-menu">
+                <i class="icofont-navigation-menu mobile-nav-toggle d-lg-none"></i>
+                {% if status %}
+                        <a href="{{ path('exchanges')}}" style="color: inherit;"><i class="icofont-heart notification"></i><span class="number-notif ">2</span></a>
+                    <a href="{{ path('logout')}}" class="connexion-btn"><button class="btn">Déconnexion</button></a>
+                {% else %}
+                    <a href="#connexion" class="connexion-btn"><button class="btn">Connexion</button></a>
+                {% endif %}
+                
+                <a href="#Inscription" class="ca-btn"><button class="btn">Créer un compte </button></a>
+            </div>
+        </div>
+    </header>
+{% endblock %}
+
+
+
+{% block footer %}
+    <footer id="footer" class="container-fluid"> 
+        <div class="entete-footer">
+            <div class="categorie-links">
+                <h4>Catégories</h4>
+                <ul>
+                    <li><a href="#">Science</a></li>
+                    <li><a href="#">Roman & Drame</a></li>
+                    <li><a href="#">Religion</a></li>
+                    <li><a href="#">Mangas</a></li>
+                </ul>
+            </div>
+
+            <div class="information">
+                <h4>Information</h4>
+                <ul>
+                    <li><a href="#">Contactez-nous</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Politique de confidentialité</a></li>
+                </ul>
+            </div>
+
+            <div class="adress">
+                <h4>Adresse & Réseaux</h4>
+                <p>
+                    Fann, Avenu Cheikh Anta Diop<br/>
+                </p>
+                <p class="social-links">
+                    <a href="https://web.facebook.com/thiernomamoudou.sabaly/" target="_blank"><i class="icofont-facebook rounded rounded-circle"></i></a>
+                    <a href="https://www.linkedin.com/in/thierno-sabaly-642846151/" target="_blank"><i class="icofont-linkedin rounded rounded-circle"></i></a>
+                    <a href="#"><i class="icofont-instagram rounded rounded-circle" target="_blank"></i></a>
+                </p>
+            </div>
+        </div>
+
+        <div class="copyright">
+			&copy; <strong><span>copyright</span></strong>-2020, Tout droit réservé. Design by <strong>S@dmin</strong>
+		</div>
+    </footer>
+
+    <a href="#header" class="back-to-top"><i class="icofont-simple-up"></i></a>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // récupérer le nombre de trocs en cours d'attente de validation
+        });
+    </script>
+{% endblock %}

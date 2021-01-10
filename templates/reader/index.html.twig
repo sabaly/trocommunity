@@ -1,0 +1,43 @@
+{% extends 'global.html.twig' %}
+
+{% block title %}{{ parent() }} Espace lecteur{% endblock %}
+
+{% block  stylesheets%}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/reader/reader_style.css') }}"/>
+{% endblock %}
+
+{% block sections %}
+    <section id="reader-zone" class="container-fluid">
+        <div class="side-bar d-none d-lg-block">
+            <div class="user-infos">
+                <h1>{{ user.getIdentifiant() }}</h1>
+                <p>{{ books | length }} livres</p>
+            </div>
+            <div class="user-menu">
+                <ul>
+                    <li class="library"><a href="{{ path('library') }}">Ma bibliothèque</a></li>
+                    <li class="preferences"><a href="{{ path('preferences') }}">Mes préférences</a></li>
+                    <li class="suggestions"><a href="{{ path('suggestions') }}">Recommandations</a></li>
+                    <li class="exchanges"><a href="{{ path('exchanges') }}">Trocs</a></li>
+                    <li class="propositions"><a href="{{ path('propositions') }}">Propositions</a></li>
+                    <li class="settings"><a href="{{ path('settings') }}">Paramètres</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content">
+            {% block library %}{% endblock %}
+            {% block preferences %}{% endblock %}
+            {% block suggestions %}{% endblock %}
+            {% block exchanges %}{% endblock %}
+            {% block propositions %}{% endblock %}
+            {% block settings %}{% endblock %}
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/js/reader.js')}}"></script>
+    <script src="{{ asset('assets/js/validation.js')}}"></script>
+{% endblock %}

@@ -1,0 +1,93 @@
+{% extends 'reader/index.html.twig' %}
+
+{% block title %}{{ parent() }} Bibliothèque{% endblock %}
+
+{% block  stylesheets %}
+    {{ parent() }}
+    <style>
+      .user-menu ul li.propositions a {
+          color: #E91E1E;
+        }
+
+        
+        .propositions {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+
+        .propositions * {
+          margin: 10px;
+        }
+
+        .proposition {
+          width: 100%;
+          display: flex;
+          justify-content: space-around;
+          border-bottom: 1px dotted #000;
+        }
+
+        .details {
+          width: 100%;
+        }
+
+        .actions {
+          display:flex;
+          flex-direction: column;
+        }
+
+        @media(max-width: 768px) {
+          .proposition {
+            flex-direction: column;
+          }
+
+          .actions {
+            flex-direction: row;
+            flex-wrap: wrap;
+          }
+        }
+        .alert-popup {
+            width: auto;
+            height: auto;
+            background: transparent;
+            padding: 0;
+            position: fixed;
+            z-index: 9999;
+        }
+    </style>
+{% endblock %}
+
+{% block suggestions %}
+    <div class="alert-popup">
+        <p class="alert alert-success"></p>
+    </div>
+    <h1>On vous a  proposé</h1>
+ <div class="propositions">    
+    {% for item in books %}
+        <div class="proposition">
+          <img src="{{ asset('assets/img/uploads/'~item.getImage()) }}" width="200" height="250"/>
+          <div class="details">
+            <a href="{{ path('details', {'id': item.getIdlivre() }) }}"><h1>{{item.getNomlivre()}}</h1></a>
+            <a href=""><small>{{ proprietaires[item.getIdlivre()]}}</small></a>
+            <hr>
+            <p>{{item.getDesclivre()}}</p>
+          </div>
+
+          <div class="actions">
+                <a href="">
+                  <button class="btn btn-success" onclick="exchange(event, {{ item.getIdlivre()}}, {{ againts[item.getIdlivre()].getIdlivre()}})"><i class="icofont-check"></i> Accepter</button>
+                </a>
+                <a href="{{ path('details', {'id': againts[item.getIdlivre()].getIdlivre()}) }}">
+                  <button class="btn btn-warning"><i class="icofont-book"></i> Contre </button>
+                </a>
+          </div>
+        </div>
+      
+    {% endfor %}
+        {% if books | length == 0 %}
+      <div><p><em>Aucune proposition pour l'instant</em></p></div>
+    {% endif %}
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'reader/index.html.twig' %}
+
+{% block title %}{{ parent() }} Paramètre{% endblock %}
+
+{% block  stylesheets %}
+    {{ parent() }}
+    <style>
+        #account-form {
+            position: relative;
+            top: 20%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .form-group * {
+            margin: 5px;
+        }
+
+        .personal-info, .account {
+            flex:1;
+            margin: 10px;
+        }
+
+        @media(max-width: 768px) {
+            #account-form {
+                flex-direction: column;
+                position: relative;
+                top: 0;
+            }
+        }
+
+        .user-menu ul li.settings a {
+          color: #E91E1E;
+        }
+        
+    </style>
+{% endblock %}
+
+{% block settings %}
+    <form id="account-form">
+            <div class="personal-info">
+                <div class="form-group">
+                    <input class="form-control" type="text" placeholder="Nom" name="last-name"/>
+                    <input class="form-control" type="text" placeholder="Prenom" name="first-name"/>
+                    <input class="form-control" type="text" placeholder="Téléphone" name="phone"/>
+                    <input class="form-control" type="text" placeholder="Adresse" name="address"/>
+                </div>
+            </div><br/>
+            <div class="account">
+                <div class="form-group">
+                    <input class="form-control" type="text" placeholder="Identifiant" name="username"/>
+                    <input class="form-control" type="password" placeholder="Mot de passe" name="password"/>
+                    <button type="submit" class="btn btn-success">Enregistrer</button>
+                </div>
+            </div>
+        </form>
+{% endblock %}

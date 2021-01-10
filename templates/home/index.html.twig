@@ -1,0 +1,261 @@
+{% extends "global.html.twig" %}
+
+{% block title %} {{ parent() }} Acceuil{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/home_style.css') }}">
+    <style type="text/css">
+        .card-actions {
+            float: right;
+        }
+        .card-actions i {
+            font-size: 20px;
+            padding: 10px;
+            border: 1px solid #000;
+            cursor: pointer;
+        }
+        .card-actions i:hover {
+            color: #E91E1E;
+            border: 1px solid #E91E1E;
+        }
+
+        .alert-popup {
+            width: auto;
+            height: auto;
+            background: transparent;
+            padding: 0;
+            position: fixed;
+            z-index: 9999;
+        }
+    </style>
+{% endblock %}
+
+{% block hero %}
+    <div id="hero">
+        <div class="hero-content">
+            <h1>BIENVENUE chez <span class="troc">TROC</span>OMMUNITY</h1>
+            <p>Echanger vos livres contre ceux qui vous intéresse sans bouger de chez-vous.</p>
+            <button class="btn"><a href="#about" class="scrollto">Découvrir</a></button>
+        </div>
+    </div>
+{% endblock %}
+
+{% block sections %}
+    <div class="alert-popup">
+        <p class="alert alert-success"></p>
+    </div>
+
+    <section id="about" class="container">
+        <div id="about-carousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="{{asset('assets/img/slides/1.jpg')}}" height="400" class="d-block w-100" alt="">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{asset('assets/img/slides/2.jpg')}}" height="400"  class="d-block w-100" alt="<span>Photo by <a href='https://unsplash.com/@henry_be?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText'>Henry Be</a> on <a href='https://unsplash.com/s/photos/library?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText'>Unsplash</a></span>">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{asset('assets/img/slides/2.jpg')}}" height="400"  class="d-block w-100" alt="<span>Photo by <a href='https://unsplash.com/@jaredd_craig?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText'>Jaredd Craig</a> on <a href='https://unsplash.com/s/photos/library?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText'>Unsplash</a></span>">
+                </div>
+            </div>
+        </div>
+        <div class="about-text">
+            <h1>A propos</h1>
+            <hr class="underline"/><br>
+            <p>
+                Trocommunity est une plateforme d'échange  de livres. Grace à sa grande communauté, vous y trouverez les livres qui vous intéresse et échanger avec les vôtres.
+                <br/><br/>
+                Nous somme implantés au Sénégal dans la région de Dakar. Nous disposons d'agents sur le terrain qui se chargent  du transport des livres à échanger.
+                <br/><br/>
+                Qu'attendez-vous ? Allez explorez le monde des livres qui s'ouvre à vous
+            </p>
+        </div>
+    </section>
+
+
+    <section id="books" class="container">
+        <div class="title">
+            <h1>Nos livres</h1>
+            <hr class="underline"/>
+        </div>
+
+        <div class="book-search">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Entrer le terme clef" aria-label="Secret word with two button addons" aria-describedby="button-addon4">
+                <div class="input-group-append" id="button-addon4">
+                    <button class="btn searchbtn" type="button"><i class="icofont-search"></i></button>
+                    <button type="button" class="btn searchbtn dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Mots Clefs</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Astronomie</a>
+                        <a class="dropdown-item" href="#">Amour</a>
+                        <a class="dropdown-item" href="#">Einstein</a>
+                        <a class="dropdown-item" href="#">Spinoza</a>
+                        <a class="dropdown-item" href="#">...</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="List-of-books">
+            <div class="card-deck row">
+            {% for item in books %}
+                <div class="col-md-3 col-sm-6">
+                  <div class="card">
+                    <img class="card-img-top" src="{{ asset('assets/img/uploads/'~item.getImage())}}" width="250" height="300" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title"><a href="">{{ item.getNomLivre() }}</a></h5>
+                      <p class="card-text">
+                        {{ item.getDesclivre()|striptags|slice(0, 15)|raw~" etc." }}
+                      </p>
+                      <div class="card-actions">
+                        <i class="icofont-share rounded rounded-circle" title="Recommander à" onclick="suggest(event, {{ item.getIdlivre() }})"></i>
+                        <i class="icofont-heart rounded rounded-circle" data-toggle="tooltip" data-placement="top" title="Ajouter au préférences" onclick="addToFavorite(event, {{ item.getIdlivre() }})"></i>
+                      </div>
+                    </div>
+                    <div class="card-footer">
+                      <small class="text-muted">Modifié le {{ item.getDatemodif().format('d/m/Y à h:i') }}</small>
+                    </div>
+                  </div>
+                </div>
+            {% endfor %}
+            {% if books|length == 0 %}
+                Aucun livre pour l'instant
+            {% endif %}
+            </div>
+        </div>
+    </section>
+
+
+    <section class="container mes-espaces">
+        <div class="ma-bibliotheque">
+            <img src="{{ asset('assets/img/mabibliotheque.jpg')}}"/>
+            <div class="espace-text">
+                {% if status %}
+                    <a href="{{ path('library') }}">Ma bibliotheque</a>
+                {% else %}
+                    <a href="#connexion">Ma bibliotheque</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="preference">
+            <img src="{{ asset('assets/img/prefere.jpg')}}"/>
+            <div class="espace-text">
+                {% if status %}
+                    <a href="{{ path('preferences') }}">Mes préférences</a>
+                {% else %}
+                    <a href="#connexion">Mes préférences</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="recommandation">
+            <img src="{{ asset('assets/img/recommande.jpg')}}"/>
+            <div class="espace-text">
+                {% if status %}
+                    <a href="{{ path('suggestions') }}">Recommandation</a>
+                {% else %}
+                    <a href="#connexion">Recommandation</a>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <section id="Inscription" class="container">
+        <div>
+            <h1>Rejoindre notre communauté</h1>
+            <hr class="underline"/>
+        </div>
+        <form id="inscription-form">
+            <div class="personal-info">
+                <div class="form-group">
+                    <input class="form-control" type="text" placeholder="Nom" name="last-name" id="last-name"/>
+                    <div class="alert-zone last-name-alert"></div>
+                    <input class="form-control" type="text" placeholder="Prenom" name="first-name" id="first-name"/>
+                    <div class="alert-zone first-name-alert"></div>
+                    <input class="form-control" type="text" placeholder="Téléphone" name="phone" id="phone"/>
+                    <div class="alert-zone phone-alert"></div>
+                    <input class="form-control" type="text" placeholder="Adresse" name="address" id="address"/>
+                    <div class="alert-zone address-alert"></div>
+                </div>
+            </div>
+            <div class="account">
+                <div class="form-group">
+                    <input class="form-control" type="text" placeholder="Identifiant" name="username" id="username"/>
+                    <div class="alert-zone username-alert"></div>
+                    <input class="form-control" type="password" placeholder="Mot de passe" name="password" id="password"/>
+                    <div class="alert-zone password-alert"></div>
+                    <input class="form-control" type="password" placeholder="Confiremer le mot de passe" name="conf-password" id="conf-password"/>
+                    <div class="alert-zone conf-password-alert"></div>
+                    <div class="form-alert-zone"></div>
+                    <button type="submit" class="btn submitbtn">Créer</button>
+                </div>
+            </div>
+        </form>
+    </section>
+
+    <section id="connexion" class="container-fluid">
+        <form id="connexion-form">
+            <div class="form-row">
+                <div class="col-4">
+                    <input type="text" class="form-control" name="identifiant" placeholder="Identifiant" id="identifiant" />
+                    <div class="alert-zone identifiant-alert"></div>
+                </div>
+                <div class="col-4">
+                    <input type="password" class="form-control" name="motDePasse" placeholder="Mot de passe" id="motDePasse"/>
+                    <div class="alert-zone motDePasse-alert"></div>
+                </div>
+                <div class="col-4">
+                    <button type="submit" class="btn connexionbtn">Connexion</button>
+                </div>
+            </div>
+        </form>
+    </section>
+
+    <section id="contact" class="container">
+        <div class="title">
+            <h1>Contactez-nous</h1>
+            <hr class="underline" />
+        </div>
+
+        <div class="contacts">
+            <div class="contact">
+                <i class="icofont-envelope"></i>
+                <p>trocmunity.contact@gmail.com / tmssam47@gmail.com</p>
+            </div>
+
+            <div class="contact">
+                <i class="icofont-phone"></i>
+                <p>+221 78 537 89 91 / +221 33 777 55 22</p>
+            </div>
+        </div>
+
+        <div class="message-us">
+            <form id="contact-form">
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <input type="mail" class="form-control" name="email" placeholder="Votre email"/>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="object" placeholder="Objet"/>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <textarea placeholder="Message" name="message" class="form-control" rows="10"></textarea>
+                </div>
+
+                <div class="form-row">
+                    <button type="submit" class="btn">Envoyer</button>
+                </div>
+            </form>
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/js/App.js')}}"></script>
+    <script src="{{ asset('assets/js/validation.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,106 @@
+#header {
+    background: #000;
+    position: sticky;
+    top: 0;
+}
+/*
+    Espace lecteur
+*/
+#reader-zone {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    padding: 20px;
+}
+.side-bar {
+    height: 100%;
+    width: 25%;
+    border-right: 1px solid rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 15%;
+}
+
+.user-infos {
+    margin-top: 10px;margin-bottom: 10px;
+    padding: 5px;
+}
+
+.side-bar ul {
+    list-style: none;
+    padding: 5px 0px 5px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.side-bar ul li {
+    padding: 10px;
+    font-size: 25px;
+    width: 100%;
+}
+.side-bar ul li:hover {
+    transition: 0.4s;
+    background: #000;
+}
+.side-bar ul li.active a , .side-bar ul li:hover a{ 
+    color: #fff; 
+}
+.content {
+    width: 75%;
+    padding-left: 5%;
+}
+#library {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.book {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    padding-left: 5%;
+    border-radius: 50px;
+    background: #000;
+    margin: 5px;
+}
+
+.books-infos {
+    flex: 0.8;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    vertical-align: center;
+    background:#fff;
+    padding: 5px;
+    border: 1px solid #000;
+}
+.book .actions {
+    display: flex;
+    flex-wrap: wrap;
+    width: 20%;
+    color: #fff;
+    justify-content: space-around;
+}
+
+.book .actions a {
+    color: #fff;
+}
+.book .actions a:hover {
+    color: #E91E1E;
+}
+
+.book .actions * {
+    margin: 1px;
+}
+
+i {
+    font-size: 16px;
+    
+}
+
+#footer {
+    margin:0;
+}

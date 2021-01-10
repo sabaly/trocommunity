@@ -1,0 +1,85 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+  BIENVENUE sur mon blog
+{% endblock %}
+
+{% block stylesheets %}
+<style type="text/css">
+	body {
+		color: #444444;
+		padding-top: 10%;
+	}
+
+	h1 {
+		background: #ccc;
+		border-radius: 10px;
+	}
+
+	#left-side, h1 {
+		width: 50%;
+		margin: auto;
+		padding: 10px;
+		text-align: center;
+	}
+
+	ul {
+		display : flex;
+		flex-wrap: wrap;
+		list-style: none;
+		align-content: space-around;
+	}
+
+	li, form{
+		background: #FF7140;
+		border-radius: 10px;
+		padding: 10px;
+		margin: 10px;
+	}
+
+	a {
+		transition: 0.5s;
+		text-decoration: none;
+		color: #fff;
+	}
+
+	a:hover {
+		transition: 1s;
+		font-size: 25px;
+	}
+
+	input {
+		border-radius: 10px;
+		height: 25px;
+	}
+
+	input[type=submit] {
+		background: #ccc;
+	}
+</style>
+{% endblock %}
+
+{% block header %}
+<h1>
+	BIENVENUE DANS MON BLOG 
+</h1>
+{% endblock %}
+
+
+{% block leftside %}
+<div id="left-side">
+	<h3>
+		SAVOIR  
+	</h3>
+	<ul>
+		{% for question in questions %}
+		<li> <a href="/blog/show/{{ question }}">{{ question }}</a></li>
+		{% endfor %}
+	</ul>
+
+	<form action="/blog/show/user" method="POST">
+		<input type="text" name="yourQuestion" placeholder="Votre question" />
+		<input type="submit" value="Envoyer"/>
+	</form>
+</div>
+{% endblock %}

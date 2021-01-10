@@ -1,0 +1,98 @@
+{% extends 'reader/index.html.twig' %}
+
+{% block title %}{{ parent() }} Bibliothèque{% endblock %}
+
+{% block  stylesheets %}
+    {{ parent() }}
+    <style>
+        #echanges {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .echange {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            border-bottom: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        .book1, .book2 {
+            width: 30%;
+        }
+
+        .validation {
+            color: #fff;
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .validation div {
+            border: 1px solid #fff;
+            width: 100%;
+            padding: 5px;
+
+        }
+        .validation i {
+            font-size: 15px;
+        }
+        .user-menu ul li.exchanges a {
+          color: #E91E1E;
+        }
+        .validation i {
+            color: #fff;
+            font-size: 50px;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        .alert-popup {
+            width: auto;
+            height: auto;
+            background: transparent;
+            padding: 0;
+            position: fixed;
+            z-index: 9999;
+        }
+    </style>
+{% endblock %}
+
+{% block exchanges %}
+    <div class="alert-popup">
+        <p class="alert alert-success"></p>
+    </div>
+    <h1>Etats de vos échanges</h1>
+<div id="echanges">
+{% for item in books %}
+    
+    {% if item|length > 0 %}
+    <div class="echange">
+            <div class="book1">
+                <img src="{{ asset('assets/img/uploads/'~item[0].getImage())}}"  width="200" height="200"/>
+                <a href="{{ path('details', {'id': item[0].getIdlivre() }) }}"><h3>{{ item[0].getNomlivre()}}</h3></a>
+            </div>
+            <div class="validation">
+                {% if states[item[0].getIdlivre()] %}
+                    <div style="color: #00df00;"><i class="icofont-check-circled" style="background: #00df00;">Validé</i><br>
+                        <p class="alert alert-success">Le livre sera livré à votre partenaire d'échange et vous reçevrez votre livre par l'intermédiaire d'un agent.</p>
+                    </div>
+                {% else %}
+                    <div><i class="icofont-close-circled" style="background: #ccc;">En cours</i></div>
+                {% endif %}
+            </div>
+            {% if item|length == 2 %}
+                <div class="book2">
+                    <img src="{{ asset('assets/img/uploads/'~item[1].getImage())}}"  width="200" height="200"/>
+                    <a href="{{ path('details', {'id': item[1].getIdlivre() }) }}"><h3>{{ item[1].getNomlivre() }}</h3></a>
+                </div>
+            {% endif %}
+    </div>
+    {% endif %}
+{% endfor %}
+</div>
+{% endblock %}
+

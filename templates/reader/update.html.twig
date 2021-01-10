@@ -1,0 +1,53 @@
+{% extends "global.html.twig" %}
+
+{% block  stylesheets %}
+	{{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/reader/reader_style.css') }}"/>
+    <style type="text/css">
+    	.update {
+    		background: #000;
+	    	color: #fff;
+	    	display: flex;
+	    	flex-direction: column;
+	    	justify-content: center;
+	    	align-items: center;
+	    	width: 50%;
+	    	margin: auto;
+	    }
+
+	    .back {
+	    	position: relative;
+	    	bottom: 0;
+	    	left: 0;
+	    }
+    </style>
+{% endblock %}
+
+
+{% block sections %}
+	<div class="container update">
+		<div>
+	            {% for message in app.flashes('updated') %}
+	                <p class="alert alert-success">{{ message }}</p>
+	            {% endfor %}
+		</div>
+		<div class="updateForm">
+			{{ form_start(form) }}
+				{{ form_widget(form) }}
+			{{ form_end(form) }}
+		</div>
+		<div>
+			<a href="{{ path('library') }}"><button class="btn btn-secondary back">Bibliothèque</button></a>
+		</div>
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            bsCustomFileInput.init()
+        })
+    </script>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'reader/index.html.twig' %}
+
+{% block title %}{{ parent() }} Bibliothèque{% endblock %}
+
+{% block  stylesheets %}
+    {{ parent() }}
+    <style>
+      .user-menu ul li.suggestions a {
+          color: #E91E1E;
+        }
+
+        
+        .suggestions {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+
+        .suggestions * {
+          margin: 10px;
+        }
+
+        .suggestion {
+          width: 100%;
+          display: flex;
+          justify-content: space-around;
+          border-bottom: 1px dotted #000;
+        }
+
+        .details {
+          width: 100%;
+        }
+
+        .actions {
+          display:flex;
+          flex-direction: column;
+        }
+
+        @media(max-width: 768px) {
+          .suggestion {
+            flex-direction: column;
+          }
+
+          .actions {
+            flex-direction: row;
+          }
+        }
+    </style>
+{% endblock %}
+
+{% block suggestions %}
+    <h1>On vous a  Recommander</h1>
+
+  <div class="suggestions">    
+    {% for item in 0..5 %}
+        <div class="suggestion">
+          <img src="{{ asset('assets/img/1/1/mc2.jpeg') }}" width="200" height="250"/>
+          <div class="details">
+            <a href=""><h1>Titre</h1></a>
+            <a href=""><small>Propriètaire</small></a>
+            <hr>
+            <p>Description</p>
+          </div>
+
+          <div class="actions">
+                <button class="btn btn-success"><i class="icofont-heart"></i> Ajouter</button>
+                <button class="btn btn-danger"><i class="icofont-bin"></i> Ignorer </button>
+          </div>
+        </div>
+      
+    {% endfor %}
+    </div>
+
+
+{% endblock %}

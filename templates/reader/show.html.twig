@@ -1,0 +1,68 @@
+{% extends "global.html.twig" %}
+
+{% block  stylesheets %}
+	{{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/reader/reader_style.css') }}"/>
+    <style type="text/css">
+    	#details {
+    		margin: 10px;
+    	}
+    	.details {
+    		display: flex;
+    		justify-content: space-between;
+    		align-items: center;
+    		width: 100%;
+    		margin: auto;
+    		padding: 10px;
+    		background: #000;
+    		color: #fff;
+    		border-radius: 10px;
+    	}
+    	.image img {
+    		width: 80%;
+    		height: 80%;
+    	}
+    	.image {
+    		flex-direction: flex;
+    		justify-content: space-around;
+    		align-items: center;
+    	}
+    </style>
+{% endblock %}
+
+
+{% block sections %}
+	<section id="details" class="container-fluid">
+		<div class="container details row">
+			<div class="col-md-6 col-sm-12">
+				<h1>Détails du livre</h1>
+				<div>
+					<h6 class="alert alert-secondary">Titre</h6>
+					<p class="alert">{{ livre.getNomlivre() }}</p>
+					<h6 class="alert alert-secondary">Desciption</h6>
+					<p class="alert">
+						{{ livre.getDesclivre() }}
+					</p>
+					<h6 class="alert alert-secondary">Catégorie, Propriétaire, Réaction</h6>
+					<p class="alert">{{ categorie.getNomcategorie() }}, SABALY, 15</p>
+					<a href="{{ path('update', {'id': livre.getIdlivre() }) }}"><button class="btn btn-primary">Modifier</button></a>
+					<a href="{{ path('library') }}"><button class="btn btn-secondary">Bibliothèque</button></a>
+					
+				</div>
+			</div>
+			<div class="col-md-6 col-sm-12 image">
+				<img src="{{ asset('assets/img/uploads/'~ livre.getImage()) }}">
+			</div>
+		</div>
+	</section>
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            bsCustomFileInput.init()
+        })
+    </script>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'reader/index.html.twig' %}
+
+{% block title %}{{ parent() }} Bibliothèque{% endblock %}
+
+{% block  stylesheets %}
+    {{ parent() }}
+    <style type="text/css">
+        table td {
+            padding: 10px;
+        }
+        .user-menu ul li.preferences a {
+          color: #E91E1E;
+        }
+
+        .preferences {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+
+        .preferences * {
+          margin: 10px;
+        }
+
+        .preference {
+          width: 100%;
+          display: flex;
+          justify-content: space-around;
+          border-bottom: 1px dotted #000;
+        }
+
+        .details {
+          width: 100%;
+        }
+
+        .actions {
+          display:flex;
+          flex-direction: column;
+        }
+
+        @media(max-width: 768px) {
+          .preference {
+            flex-direction: column;
+          }
+
+          .actions {
+            flex-direction: row;
+          }
+        }
+     </style>
+{% endblock %}
+
+{% block preferences %}
+<h1>Vos préférences</h1>
+    <div class="preferences">    
+    {% for item in books %}
+        <div class="preference">
+          <img src="{{ asset('assets/img/uploads/'~item.getImage()) }}" width="200" height="250"/>
+          <div class="details">
+            <a href="{{ path('details', {'id': item.getIdlivre() }) }}"><h1>{{ item.getNomlivre() }}</h1></a>
+            <a href=""><small>{{ proprietaires[item.getIdlivre()]}}</small></a>
+            <hr>
+            <p>{{ item.getDesclivre() }}</p>
+          </div>
+
+          <div class="actions">
+                {#<a href="{{ path('details', {'id': item.getIdlivre() }) }}"><button class="btn btn-warning"><i class="icofont-link"></i> Détails</button></a>#}
+                <button class="btn btn-danger" onclick="removeFromPreference(event, {{item.getIdlivre()}})"><i class="icofont-bin"></i> Effacer </button>
+          </div>
+        </div>
+    {% endfor %}
+    {% if books | length == 0 %}
+      <div><p><em>Aucun Livre</em></p></div>
+    {% endif %}
+    </div>
+
+{% endblock %}

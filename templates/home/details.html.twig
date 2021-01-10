@@ -1,0 +1,78 @@
+{% extends "reader/index.html.twig" %}
+
+{% block  stylesheets %}
+	{{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/reader/reader_style.css') }}"/>
+    <style type="text/css">
+    	#header {
+    		background: #000;
+    	}
+    	#details {
+    		margin: 10px;
+    	}
+    	.details {
+    		display: flex;
+    		justify-content: space-between;
+    		align-items: center;
+    		width: 100%;
+    		margin: auto;
+    		padding: 10px;
+    		background: #000;
+    		color: #fff;
+    		border-radius: 10px;
+    	}
+    	.image img {
+    		width: 80%;
+    		height: 80%;
+    	}
+    	.image {
+    		flex-direction: flex;
+    		justify-content: space-around;
+    		align-items: center;
+    	}
+
+        @media(max-width: 768px) {
+            .details {
+                flex-direction: column;
+            }
+
+            .image {
+                margin: 5px;
+            }
+            .image img{
+                width: 100%;
+            }
+        }
+    </style>
+{% endblock %}
+
+
+{% block sections %}
+	<section id="details" class="container-fluid">
+		<div class="container details row">
+			<div class="col-md-6 col-sm-12">
+				<h1>Détails du livre</h1>
+				<div>
+					<h6 class="alert alert-secondary">Titre</h6>
+					<p class="alert">{{ livre.getNomlivre() }}</p>
+					<h6 class="alert alert-secondary">Desciption</h6>
+					<p class="alert">
+						{{ livre.getDesclivre() }}
+					</p>
+					<h6 class="alert alert-secondary">Catégorie, Propriétaire, Réaction</h6>
+					<p class="alert">{{ categorie.getNomcategorie() }}, SABALY, 15</p>
+					<a href="{{ path('preferences') }}"><button class="btn btn-secondary">Préférences</button></a>
+                    <a href="{{ path('propositions') }}"><button class="btn btn-secondary">Propositions</button></a>
+					
+				</div>
+			</div>
+			<div class="col-md-6 col-sm-12 image">
+				<img src="{{ asset('assets/img/uploads/'~ livre.getImage()) }}">
+			</div>
+		</div>
+	</section>
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+{% endblock %}

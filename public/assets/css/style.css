@@ -1,0 +1,225 @@
+/*
+    Générale
+*/
+a {
+    text-decoration: none;
+    color: #000000;
+}
+a:hover {
+    text-decoration: none;
+    color: #E91E1E;
+}
+
+.btn {
+    background: #000000;
+    color: #fff;
+    border-radius: none;
+}
+
+
+/*
+    header
+*/
+#header {
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    z-index: 9999;
+    color: #fff;
+}
+
+
+.troc {
+    color: #E91E1E;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.nav-menu  a {
+    color: #fff;
+}
+.nav-menu .active {
+    color: #E91E1E;
+}
+
+.nav-menu li {
+    padding: 10px;
+    padding-bottom: 0;;
+}
+.nav-menu li:hover > a {
+    color: #E91E1E;
+}
+
+.categories {
+    display: none;
+    list-style: none;
+}
+
+.cat:hover .categories {
+    transition: 0.7s;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #000000;
+    padding: 10px;
+    z-index: 9999;
+}
+
+.number-notif {
+    color: #E91E1E;
+    position: relative;
+    top: -10px;
+    padding: 2px;
+    border-radius: 10px;
+}
+.notification, .mobile-nav-toggle {
+    font-size: 20px;
+    cursor: pointer;
+}
+/*
+    Mobile navigation
+*/
+
+
+
+.mobile-nav-toggle {
+    margin-right: 10px;
+} 
+.mobile-nav-toggle i {
+    color: #fff;/*384046*/
+}
+  
+.mobile-nav {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    z-index: 9999;
+    background: #000000;
+    transition: ease-in-out 0.2s;
+    opacity: 0;
+    visibility: hidden;
+    padding: 20px;
+    width: 100%;
+}
+
+
+.mobile-nav {
+    display: flex;
+    justify-content: space-around;
+}
+
+.mobile-nav a {
+    color: #fff;
+}
+  
+.mobile-nav * {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.mobile-nav-active .mobile-nav {
+    opacity: 1;
+    visibility: visible;
+}
+  
+/* ------ end mobile navigation css -------------- */
+
+.notification:hover, .mobile-nav-toggle:hover {
+    color: #E91E1E;
+}
+
+.connexion-btn:hover .btn, .ca-btn:hover .btn{
+    color: #E91E1E;
+}
+
+@media (max-width: 768px ) {
+    #header {
+        flex-direction: column;
+    }
+}
+
+/*
+    Footer
+*/
+
+#footer {
+    margin-top: 50px;
+    background: #000000;
+    color: #fff;
+    padding: 50px;
+    padding-bottom: 20px;
+    /*position: absolute;
+    bottom: 0;*/
+}
+
+.entete-footer {
+    display: flex;
+    justify-content: space-around;
+}
+
+#footer ul {
+    list-style: circle;
+    display: flex;
+    flex-direction: column;
+}
+
+#footer a {
+    color: #fff;
+}
+#footer li:hover a, #footer li:hover{
+    color: #E91E1E;
+    transition: 0.7s;
+    position: relative;
+    left: 5px;
+}
+
+.social-links {
+    display: flex;
+    justify-content: space-between;
+    float: left;
+}
+
+.social-links * {
+    margin-left: 10px;
+    font-size: 25px;
+    color: #E91E1E;
+    cursor: pointer;
+}
+
+.social-links *:hover { transition: 0.7s; color: #fff; }
+
+.copyright {
+    width: 50%;
+    margin: auto;
+}
+
+.copyright strong { color: #E91E1E; }
+
+@media (max-width: 768px ) {
+    .entete-footer { flex-direction: column;}
+    .copyright { width: 100%;}
+}
+.back-to-top {
+    position: fixed;
+    right: 15px;
+    bottom: 15px;
+    padding: 10px;
+    background: #000000;
+    color: #fff;
+    z-index: 99999;
+}
+.back-to-top:hover {
+    transition: 0.7s;
+    color: #fff;
+    background: #E91E1E;
+}
